@@ -14,8 +14,9 @@ var mongoose = require('mongoose');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var login = require('./routes/login');
+var argv = require('optimist').argv;
 
-mongoose.connect("mongodb://localhost/MiMongoDB", function(err) {
+mongoose.connect('mongodb://'+ argv.be_ip +':80/MiMongoDB', function(err) {
   if(!err){
     console.log('Connected to Database');
   }else{
@@ -94,6 +95,7 @@ app.use(function(err, req, res, next) {
   });
 });
 
-app.set('port',process.env.PORT || 3000);
+//app.set('port',process.env.PORT || 3000);
+app.listen(8080, argv.fe_ip);
 
 module.exports = app;
